@@ -1,0 +1,167 @@
+(Documentation date: 2016-5-12)
+
+Usage:
+
+    sabl_mpl.py [-p w] [-discard h r] [-nspline n] [-alpha a] image_file.png 
+
+Explanation:
+
+   sabl_mpl.py is a simple drawing program for measuring features in 2-D images.  It minimizes the number of mouse-clicks needed to perform a measurement and prints all measurements to a terminal.
+
+Typical Usage Example:
+
+    sabl_mpl.py -p 1.92 image_file.png
+
+    This tells the program to load and display the file "image_file.png".  The "-p 1.92" arguments let the program know that width of each pixel in the image is 1.92 (in nm, for example).  All tick-marks, distances, radii, and curve-lengths reported by program will be in these units (nm), instead of in pixels.  Later, any parameters that you enter into the program (such as the "-discard" parameters discussed below) will then be specified in these physical units (instead of pixels).
+
+---- Installation: ----
+
+    This is a graphical program which must be invoked from a terminal.  (When doing so, do not use "&".)
+
+    This program requires python 2.6 or later.
+    It also requires that the "matplotlib" python module is installed.  As with all linux and unix programs, this script must be copied to a directory which is located in your PATH.  (For more information see "Installation Details" at the end of this file.)
+
+---- General Usage: ----
+
+    Once the program is started, you will see the image in a window on the right, along with several drawing tools on the left.
+
+    Use the middle mouse button to click on the image.  Depending on which tool you have selected, clicking on the image will draw lines, triangles, circles, and curves.  Physical properties of these objects (such as lengths, angles, and radii) will be printed to the terminal that you used to launch the program, and can be saved (or piped) to a text file.  You can use the disk icon (bottom left), to save the graphics to a new file at any point.
+
+    All measurements are superimposed on top of the image as line-segments, triangles, circle, or curves.  
+
+    Some tools require you to define a curve beforehand (by selecting the "draw spline" tool).  After you have drawn a curve, you can measure its properties using other tools.
+
+    If, at any point, you make a mistake while clicking, use the 'Delete' key to undo the previous mouse click.
+
+    I recommend using the zoom/pan tool ("+" icon in lower left) to into a region of interest.  At high magnification, it is easy to click precisely with sub-pixel accuracy.  Grid lines and tick marks will help you keep track of the current zoom level.  (If you used "-p" to specify the pixel width, then tick mark labels are in physical distance units instead of pixels.)
+
+
+---- Tools ---
+
+"measure distances"
+    Middle-clicking in 2 different places in the image window draws a line segment.  (If you look carefully, the midpoint of the line should also be visible.)  The length of this line is printed to the terminal, as well as the angle of the line (relative to the x axis).  After repeating this many times, you can press "Enter", to prints out the average distance and its standard deviation.  (As with all measurements, only measurements you have not deleted are included in this average.  You can use the 'D' key to change the number of tick marks on each line segment.  See below.)
+
+"measure angles"
+    Middle-clicking in 3 different places draws a "V" shape.  The angle between the two line segments is printed to the terminal as well as the height of the triangle.  After repetitive measurements, you can hit "Enter" to report the average angle  and its standard deviation.
+
+"measure triangle heights"
+    Middle-clicking in 3 different places draws a triangle, with an additional line representing its "height".  (This tool was useful for measuring the height of bumps and indentations in the boundary of a cell.  The "height" is defined as the distance from the middle point, to the line which lies on the first and last points.  It is printed to the terminal.  After many measurements, you can hit "Enter" to report of the average height, and its standard deviation.)
+
+"measure 3point curvature"
+    Middle-clicking in 3 different places draws a circle passing through these 3 points.  The radius of curvature is printed to the terminal (as well as the coordinates of the circle's center).  After repetitive measurements, you can hit "Enter" to report the average radius and its standard deviation.
+
+"draw spline"
+      Use this mode to trace out a curve.  Middle-clicking in the image window allows you to draw a spline curve.  (As of 2016-5-10, only one connected curve can be displayed on the screen at a given time.)
+
+"measure spline curvature"
+   You can use this tool to measure the radius of curvature at a location on a curve.   You must draw a curve using the "draw spline" tool before you use this tool.  Afterwards, when you middle-click on the curve, a line which is tangent to the curve will be displayed, and its angle will be printed to the terminal (relative to the x-axis).
+
+"measure spline tangents"
+   You can use this tool to measure the angle at a location on a curve.   You must draw a curve using the "draw spline" tool before you use this tool.  Afterwards, when you middle-click on the curve, a line which is tangent to the curve will be displayed, and its angle will be printed to the terminal (relative to the x-axis).
+
+"measure curve lengths"
+   You can use this tool to measure the distance along a curve.  You must draw a curve using the "draw spline" tool before you use this tool.  Afterwards, when you middle-click twice at different locations on the curve, the interval between them will change color, and the contour-length of this interval will be printed to the terminal.
+
+---- Show and Snap-To Buttons: ----
+
+    If you have already drawn a curve, then you can constrain your mouse-clicks to lie along the curve you have defined by clicking on the "snap to curve" check box.  (This cam be useful for measuring features on the curve.  Note: This is effected by the "-nspline" command line option, which is explained below.)
+
+    Locations on the curve of special interest can be displayed as dots on the curve, by clicking on the "show curvature maxima" and "show inflection points" buttons.   (Currently, those are the only options available.  The color of each dot varies from blue to red depending on the direction of curvature at that location.  The "discard shallow minima" button can be useful to clean up an image when many curvature maxima are displayed.  See details below.)
+
+    Clicking on the "snap to dots" check box will force the points you click on features in the curve which currently appear as dots (such as inflection points, or curvature maxima).
+
+---- Notes: ----
+
+   1) USE THE MIDDLE MOUSE BUTTON FOR EVERYTHING
+
+   You must use the middle mouse-button to perform all drawing and measurement actions.  (This program uses the graphical user interface provided by matplotlib.  Unfortunately, the left and right mouse buttons in matplotlib are reserved for panning and zooming.  See below.)
+
+   2) Again, if you make a mistake at any point, you can delete recent points by pressing the 'Delete' key.  Unfortunately, as of 2016-5-10, you can not delete arbitrary points in the image.  Points must be deleted in the opposite order that they were added.
+
+   3) When you invoke matplotlib, you should NOT use the '&' character at the end of the line to free the terminal.  The program must be invoked from a terminal because all measurements are displayed on there.  If the program needs something from the user (such as the name of a file, or a numeric parameter), the user must first click on the terminal window, and type the information needed, and hit 'Enter'.  Until then, the main graphics window will be unresponsive.  (This limitation is because matplotlib does not yet support a way to enter text into the main window.)
+
+   4) Again, if you wish to save a figure at any point, then click on the disk-icon at the lower-left corner of the matplotlib window.  (Note: I recommend saving images in SVG format.  SVG vector images can be edited using adobe illustrator, or inkscape.  High-resolution bit-mapped images can then be generated by these programs.)
+
+   5) The first thing you will probably want to do after you start the program is zoom in on the region of interest.  To do that, click on the icon which looks like a plus-symbol, +, in the lower-left hand corner of the screen.  This will change the cursor to resemble a hand.  Drag with the right-mouse-button on the image to zoom on the region of interest, and drag the left-mouse-button to move the image.
+
+   6) To change the cursor back to something more sensible (so that you can see what you are clicking on), I suggest clicking on the "magnifying glass" icon near the bottom-left hand corner.  This will replace the cursor with a + symbol.  Left clicking on the image will zoom in to a rectangular region of interest.  However you use the middle mouse button to safely draw and take measurements.  If you make a mistake, you can click on the "home" icon at the lower left, to return you to the original magnification.
+
+    7) The program occasionally crashes or freezes.  If the window freezes (or if you see "Exception in Tkinter callback" printed to the terminal), then you may need to kill the program and restart it.  To do that, you may need to use the "ps -ef | grep sabl_mpl.py" and "kill" commands in a separate terminal, as the close button may not work.  These crashes are often the result of bugs in matplotlib and are beyond my control.
+
+    8) "discard shallow maxima" button
+
+    When drawing curves, clicking frequently along the length of the curve in your image may improve the look of the spline approximation, but it can also create a large number of spurious shallow bumps, as well as reducing the accuracy of any curvature or tangent-angle estimates you might make later on using this curve.
+
+    You can use the "show curvature maxima" feature to display peak of each bump or indentation.  If you click on the "discard shallow maxima" button, this will attempt to throw away extremely shallow bumps (curvature maxima) which result from over-clicking, especially when they lie on a portion of the curve which is almost straight.  Too control how this is done, use the "-discard" argument when invoking sabl_mpl.py (as discussed below).  (This will not effect the shape of the curve or improve its curvature accuracy.)
+
+    9) "save spline" & "load spline"
+
+    The coordinates of the points on the curve that you clicked on can be saved to a text file, and loaded later by clicking on the "save spline" and "load spline" buttons at the bottom left.  After clicking on these buttons, you must click on the terminal window and enter the file name.  (Note: If you use the "-p" argument to specify pixel width before saving the spline, make sure you use the same pixel width later when loading the spline, or the spline curve will be the wrong size.)
+
+
+---- Optional command-line arguments: ----
+
+   You can customize sabl_mpl.py by supplying optional command line arguments when you invoke it from the shell.
+
+   -p pixel_width  By default, sabl_mpl.py reports all distances,
+                   (and curvature radii) in units of pixels.  However you
+                   can override this by supplying a number representing
+                   the size of each pixel (in units of nanometers for example).
+		   (Note: pixel_width must be the second argument.  It must
+                          follow the image_filename argument.)
+
+   -nspline n      This determines the resolution of the spline as shown.
+                   Rather than attempt to draw a true curve, the spline curve
+                   is approximated by a list of short line segments.
+                   This allows you to control the number of line segments.
+                   (By default: 50)
+
+   -discard height radius
+                       This allows you to control the criteria used for
+                   discarding shallow bumps or indentations, which occurs in
+                   response when the user clicks on the "show curvature maxima"
+                   AND "discard shallow maxima" buttons.  After clicking on
+                   this button, in order for a curvature maxima (bump) to not
+                   be discarded, it must rise above it surroundings by at least
+                   a distance of "height" (in units of physical distance, 
+                   not pixels).  When scanning the surroundings, pairs of points
+                   in a search-radius no further than "radius" along the curve
+                   from the curvature maxima position are considered.
+                   Curvature maxima which fail this test (or are bent in the
+                   wrong direction) are deleted.  (NOTE: You can also modify 
+                   these settings after you have started the program, by 
+                   clicking on the "Draw Spline" button and hitting the 'D' key)
+                      If you prefer to do this manually, you can use the
+                   "Measure Triangle Heights" tool (upper-left), to measure the
+                   height of each of the bumps yourself.  This is also a good
+                   way to verify that the "discard shallow maxima" button is
+                   behaving the way you think it should.
+
+   -alpha alpha    This allows you to control how far the spline curve lies from
+                   the straight lines between pairs of points that you click.
+                   There is usually no need to specify the alpha parameter.
+                   For more information, the "alpha" parameter is explained here
+                   https://en.wikipedia.org/wiki/Centripetal_Catmull-Rom_spline
+
+---- Spline Details ----
+
+   This program uses natural cubic spline curves which are everywhere C2 continuous (using an alpha exponent of 0.5).  These type of splines are good for estimating curvature, however they lack a feature called "local control".  This means as you click along the curve, the spline will be readjusted to better approximate the full length of the curve you have drawn.  If curvature-maxima or inflection points are displayed as dots, you will notice that the dots may move or disappear as you continue clicking.  This is not a bug, but it is different from the behavior of most drawing programs you are probably used to.
+
+
+---- Hotkeys: ----
+
+    Once sabl_mpl.py has launched, you can further control its behavior by pressing the following keys, which take effect, depending on which tool you are currently using.
+
+    Pressing 'D' while in "draw spline" mode allows you to control the criteria used to discard curvature maxima (as explained in the discussion of the "-discard" command line option above).  You must have clicked on the "show curvature maxima" button, for this to have any effect.
+
+    Pressing 'D' while in "measure distances" mode will place "N" tiny dot-like markers evenly spaced along the length of each line-segment.  This is useful if you want to bisect (or trisect) each line segment that you are drawing.  After pressing 'D', the program will prompt you for "N".  By default, the midpoint of each line is displayed as a dot (N=2).  To turn this feature off, press 'D', and enter 0.
+
+    Pressing 'C' while in "measure 3point curvature" mode will copy the most recent circle to the location of the current mouse position.  Pressing 'A' while in this mode allows you to add a constant to the radius of the circle when it is copied (either positive or negative).
+
+---- Installation Details: ----
+
+    You must copy this program ("sabl_mpl.py") to a location in your PATH.
+    (This is necessary for all linux/unix programs, and is not specific to "sabl_mpl.py".  If you are unsure what this means, alternately, try copying the program into the same directory containing the images you wish to analyze.  If you do this, then you will need to invoke the program by putting a "./" before the name of the program when you invoke it.  For example, you might use: "./sabl_mpl.py -p 1.92 image_file.png", instead of: "sabl_mpl.py -p 1.92 image_file.png".)
+
+    Incidentally, you can test whether or not you have python set up correctly, by typing the word "python" into the terminal, and then typing "import matplotlib" and then "quit()".  There should be no error messages.
+
