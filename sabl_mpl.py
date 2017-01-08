@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# sabl_mpl.py: "spline analysis of bumps and lumps..."
+# sabl.py: "spline analysis of bumps and lumps..."
 #
 # As of v1.3.1, matplotlib is currently too unstable and feature-poor for me
 # me to recommend using it for an interactive program much fancier than this.
