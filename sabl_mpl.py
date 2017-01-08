@@ -686,15 +686,6 @@ def BumpHeightExceedsThreshold(t,
 
                 if (displacement_to_line[0] * curve_normal_direction[0] +
                     displacement_to_line[0] * curve_normal_direction[1] > 0.0):
-
-                    #FOLLOWING LINES ARE FOR DEBUGGING (a specific dataset)
-                    if abs(y0 - 4470.07)<0.1:
-                        print((X_a, Y_a),(X_b,Y_b), distance_to_line)
-                        print(curve_normal_direction[0], curve_normal_direction[1])
-                        print(nearest_point_on_line[0],nearest_point_on_line[1])
-                        print(sqrt(displacement_to_line[0]**2 +
-                                displacement_to_line[1]**2))
-
                     return True
 
             I_b -= 1
