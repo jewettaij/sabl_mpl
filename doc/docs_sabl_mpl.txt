@@ -2,24 +2,50 @@
 
 Usage:
 
-    sabl_mpl.py [-p w] [-discard h r] [-nspline n] [-alpha a] image_file.png 
+    sabl.py [-p w] [-discard h r] [-nspline n] [-alpha a] image_file.png 
 
 Explanation:
 
-   sabl_mpl.py is a simple drawing program for measuring features in 2-D images.  It minimizes the number of mouse-clicks needed to perform a measurement and prints all measurements to a terminal.
+   sabl.py is a simple drawing program for measuring features in 2-D images.  It minimizes the number of mouse-clicks needed to perform a measurement and prints all measurements to a terminal.
 
 Typical Usage Example:
 
-    sabl_mpl.py -p 1.92 image_file.png
+    sabl.py -p 1.92 image_file.png
 
     This tells the program to load and display the file "image_file.png".  The "-p 1.92" arguments let the program know that width of each pixel in the image is 1.92 (in nm, for example).  All tick-marks, distances, radii, and curve-lengths reported by program will be in these units (nm), instead of in pixels.  Later, any parameters that you enter into the program (such as the "-discard" parameters discussed below) will then be specified in these physical units (instead of pixels).
 
----- Installation: ----
+## Installation Instructions
+
+There are two ways to install sabl_mpl:
+
+## Installation using pip
+If you are familiar with pip, then run the following command from within the directory where this README file is located:
+
+    pip install .
+
+Make sure that your default pip install bin directory is in your PATH.  (This is usually something like ~/.local/bin/ or ~/anaconda3/bin/.  If you have installed anaconda, this will be done for you automatically.)  Later, you can uninstall sabl_mpl using:
+
+    pip uninstall sabl_mpl
+
 
     This is a graphical program which must be invoked from a terminal.  (When doing so, do not use "&".)
 
     This program requires python 2.6 or later.
     It also requires that the "matplotlib" python module is installed.  As with all linux and unix programs, this script must be copied to a directory which is located in your PATH.  (For more information see "Installation Details" at the end of this file.)
+
+## Manual Installation method:
+
+Alternatively, you can edit your PATH variable manually to include
+the subdirectory where the sabl.py script is located,
+as well as the subdirectory where most of the python scripts are located.
+Suppose the directory with this README file is named ``sabl_mpl''
+and is located in your home directory:
+
+If you use the bash shell, typically you would edit your 
+`~/.profile`, `~/.bash_profile` or `~/.bashrc` files 
+to contain the following lines:
+
+    export PATH="$PATH:$HOME/sabl_mpl/sabl_mpl"
 
 ---- General Usage: ----
 
@@ -86,13 +112,13 @@ Typical Usage Example:
 
    6) To change the cursor back to something more sensible (so that you can see what you are clicking on), I suggest clicking on the "magnifying glass" icon near the bottom-left hand corner.  This will replace the cursor with a + symbol.  Left clicking on the image will zoom in to a rectangular region of interest.  However you use the middle mouse button to safely draw and take measurements.  If you make a mistake, you can click on the "home" icon at the lower left, to return you to the original magnification.
 
-    7) The program occasionally crashes or freezes.  If the window freezes (or if you see "Exception in Tkinter callback" printed to the terminal), then you may need to kill the program and restart it.  To do that, you may need to use the "ps -ef | grep sabl_mpl.py" and "kill" commands in a separate terminal, as the close button may not work.  These crashes are often the result of bugs in matplotlib and are beyond my control.
+    7) The program occasionally crashes or freezes.  If the window freezes (or if you see "Exception in Tkinter callback" printed to the terminal), then you may need to kill the program and restart it.  To do that, you may need to use the "ps -ef | grep sabl.py" and "kill" commands in a separate terminal, as the close button may not work.  These crashes are often the result of bugs in matplotlib and are beyond my control.
 
     8) "discard shallow maxima" button
 
     When drawing curves, clicking frequently along the length of the curve in your image may improve the look of the spline approximation, but it can also create a large number of spurious shallow bumps, as well as reducing the accuracy of any curvature or tangent-angle estimates you might make later on using this curve.
 
-    You can use the "show curvature maxima" feature to display peak of each bump or indentation.  If you click on the "discard shallow maxima" button, this will attempt to throw away extremely shallow bumps (curvature maxima) which result from over-clicking, especially when they lie on a portion of the curve which is almost straight.  Too control how this is done, use the "-discard" argument when invoking sabl_mpl.py (as discussed below).  (This will not effect the shape of the curve or improve its curvature accuracy.)
+    You can use the "show curvature maxima" feature to display peak of each bump or indentation.  If you click on the "discard shallow maxima" button, this will attempt to throw away extremely shallow bumps (curvature maxima) which result from over-clicking, especially when they lie on a portion of the curve which is almost straight.  Too control how this is done, use the "-discard" argument when invoking sabl.py (as discussed below).  (This will not effect the shape of the curve or improve its curvature accuracy.)
 
     9) "save spline" & "load spline"
 
@@ -101,9 +127,9 @@ Typical Usage Example:
 
 ---- Optional command-line arguments: ----
 
-   You can customize sabl_mpl.py by supplying optional command line arguments when you invoke it from the shell.
+   You can customize sabl.py by supplying optional command line arguments when you invoke it from the shell.
 
-   -p pixel_width  By default, sabl_mpl.py reports all distances,
+   -p pixel_width  By default, sabl.py reports all distances,
                    (and curvature radii) in units of pixels.  However you
                    can override this by supplying a number representing
                    the size of each pixel (in units of nanometers for example).
@@ -150,7 +176,7 @@ Typical Usage Example:
 
 ---- Hotkeys: ----
 
-    Once sabl_mpl.py has launched, you can further control its behavior by pressing the following keys, which take effect, depending on which tool you are currently using.
+    Once sabl.py has launched, you can further control its behavior by pressing the following keys, which take effect, depending on which tool you are currently using.
 
     Pressing 'D' while in "draw spline" mode allows you to control the criteria used to discard curvature maxima (as explained in the discussion of the "-discard" command line option above).  You must have clicked on the "show curvature maxima" button, for this to have any effect.
 
@@ -160,8 +186,8 @@ Typical Usage Example:
 
 ---- Installation Details: ----
 
-    You must copy this program ("sabl_mpl.py") to a location in your PATH.
-    (This is necessary for all linux/unix programs, and is not specific to "sabl_mpl.py".  If you are unsure what this means, alternately, try copying the program into the same directory containing the images you wish to analyze.  If you do this, then you will need to invoke the program by putting a "./" before the name of the program when you invoke it.  For example, you might use: "./sabl_mpl.py -p 1.92 image_file.png", instead of: "sabl_mpl.py -p 1.92 image_file.png".)
+    You must copy this program ("sabl.py") to a location in your PATH.
+    (This is necessary for all linux/unix programs, and is not specific to "sabl.py".  If you are unsure what this means, alternately, try copying the program into the same directory containing the images you wish to analyze.  If you do this, then you will need to invoke the program by putting a "./" before the name of the program when you invoke it.  For example, you might use: "./sabl.py -p 1.92 image_file.png", instead of: "sabl.py -p 1.92 image_file.png".)
 
     Incidentally, you can test whether or not you have python set up correctly, by typing the word "python" into the terminal, and then typing "import matplotlib" and then "quit()".  There should be no error messages.
 
