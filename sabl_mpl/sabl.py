@@ -27,8 +27,8 @@ import bisect
 from collections import deque
 
 g_program_name = __file__.split('/')[-1]
-g_date_str     = '2016-5-23'
-g_version_str  = '0.47'
+g_date_str     = '2016-7-14'
+g_version_str  = '0.48'
 g_filename_in  = ''
 
 
@@ -686,6 +686,15 @@ def BumpHeightExceedsThreshold(t,
 
                 if (displacement_to_line[0] * curve_normal_direction[0] +
                     displacement_to_line[0] * curve_normal_direction[1] > 0.0):
+
+                    #FOLLOWING LINES ARE FOR DEBUGGING (a specific dataset)
+                    if abs(y0 - 4470.07)<0.1:
+                        print((X_a, Y_a),(X_b,Y_b), distance_to_line)
+                        print(curve_normal_direction[0], curve_normal_direction[1])
+                        print(nearest_point_on_line[0],nearest_point_on_line[1])
+                        print(sqrt(displacement_to_line[0]**2 +
+                                displacement_to_line[1]**2))
+
                     return True
 
             I_b -= 1
@@ -849,7 +858,7 @@ class LineSegmentBuilder:
                 i -= 1
             self.canvas.draw()
 
-        elif event.key.lower() == 'd':
+        elif event.key in ('d','D'):
             sys.stderr.write("Divide each line segment into how many intervals?: ")
             self.num_markers = int(sys.stdin.readline())+1
             if self.num_markers > 1:
@@ -1771,7 +1780,7 @@ class SplineHighlighter:
         self.ax = ax
         self.canvas = ax.figure.canvas
         self.object_ax_lines = []
-        self.color = (0.0, 0.5, 0.0)
+        self.color = (0.0, 0.28, 0.0)
         self.linewidth = 4.0
         #self.connect()
 
@@ -2686,7 +2695,7 @@ class SplineBuilder:
 
         # Figure out the spline parameters: c3a, c3b, c1a, c1b:
         self.c3a, self.c3b, self.c1a, self.c1b, self.t_control = \
-            CalcNaturalCubicSplineCoeffs(x, alpha_exponent)
+            CalcNaturalCubicSplineCoeffs(x, self.alpha_exponent)
 
 
     def CalcInterp(self):
@@ -3281,7 +3290,9 @@ class WorldObjects:
 
 
 
-if __name__ == "__main__":
+
+
+def main():
 
     usage_example = "    "+g_program_name+" image_file [-p pixel_width] [-discard h w] [-nspline n]"
 
@@ -3431,9 +3442,6 @@ if __name__ == "__main__":
             except IOError:
                 raise InputError(err_msg)
 
-        if (img == None) or (img.shape[0] == 0) or (img.shape[1] == 0):
-            raise InputError(err_msg)
-
         fig, ax = plt.subplots()
 
         # "world_objects" contains all of the visible objects in the plot,
@@ -3452,3 +3460,7 @@ if __name__ == "__main__":
         sys.exit(-1)
 
 
+
+
+if __name__ == "__main__":
+    main()
