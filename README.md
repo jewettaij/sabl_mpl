@@ -8,7 +8,7 @@ sabl_mpl
 ##  Description
 
 "sabl_mpl.py" is a simple spline drawing program which uses the matplotlib gui.  It was intended to be used to measure the curvature of cell membranes in electron microscopy images.  It has some features to make it convenient to repetitively measure many distances and angles in any 2-D image manually.  It requires python and matplotlib to be installed in advance.
-(This software was featured in Yao et al. (2017), DOI 10.15252/embj.201696235)
+(This software was featured in Yao et al. EMBO J. (2017), DOI 10.15252/embj.201696235)
 
 Images showing how to use it are located in the "docs" directory, as well as detailed usage and installation instructions.
 
