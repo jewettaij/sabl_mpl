@@ -1,6 +1,8 @@
 sabl_mpl
 ===========
 
+![](./doc/example_multiple_measurements_LR.png)
+
 ##  Usage
 
     sabl.py [-p w] [-discard h r] [-nspline n] [-alpha a] image_file.png 
