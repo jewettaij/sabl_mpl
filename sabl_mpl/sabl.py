@@ -27,8 +27,8 @@ import bisect
 from collections import deque
 
 g_program_name = __file__.split('/')[-1]
-g_date_str     = '2016-7-14'
-g_version_str  = '0.48'
+g_date_str     = '2018-1-23'
+g_version_str  = '0.49'
 g_filename_in  = ''
 
 
@@ -2722,8 +2722,6 @@ class SplineBuilder:
             out_file.write(str(self.x_control[i])+" "+
                            str(self.y_control[i])+"\n")
 
-
-
     def SaveInterp(self, out_file):
         assert(len(self.x_interp) == len(self.y_interp))
         N = len(self.x_interp)
@@ -2733,8 +2731,6 @@ class SplineBuilder:
         for i in range(0, N):
             out_file.write(str(self.x_interp[i])+" "+
                            str(self.y_interp[i])+"\n")
-
-
 
     def LoadControlPoints(self, in_file):
         self.x_control = []
