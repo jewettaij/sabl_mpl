@@ -2724,6 +2724,18 @@ class SplineBuilder:
 
 
 
+    def SaveInterp(self, out_file):
+        assert(len(self.x_interp) == len(self.y_interp))
+        N = len(self.x_interp)
+        if N == 0:
+            sys.stderr.write("  Nothing to save.  (Draw a spline curve before pressing this button.)\n")
+            return
+        for i in range(0, N):
+            out_file.write(str(self.x_interp[i])+" "+
+                           str(self.y_interp[i])+"\n")
+
+
+
     def LoadControlPoints(self, in_file):
         self.x_control = []
         self.y_control = []
@@ -3105,6 +3117,22 @@ class WorldObjects:
             self.spline.SaveControlPoints(out_file)
             out_file.close()
 
+    def SaveInterp(self, label):
+        sys.stderr.write("Enter a filename for writing: ")
+        filename = sys.stdin.readline().strip()
+        out_file = None
+        try:
+            in_file = open(filename, 'r')
+            in_file.close()
+            sys.stderr.write("File exists. Overwrite? (Y/N): ")
+            response = sys.stdin.readline().strip()
+            if (len(response) > 0) and (response[0].lower() == 'y'):
+                out_file = open(filename, 'w')
+        except IOError:
+            out_file = open(filename, 'w')
+        if out_file:
+            self.spline.SaveInterp(out_file)
+            out_file.close()
 
     def LoadSpline(self, label):
         sys.stderr.write("Enter a filename for reading: ")
@@ -3278,6 +3306,10 @@ class WorldObjects:
         self.ax_hide_grid = plt.axes([0.42, 0.02, 0.05, 0.10])
         self.b_hide_grid = Button(self.ax_hide_grid,'hide\ngrid')
         self.b_hide_grid.on_clicked(self.HideGrid)
+
+        self.ax_saveallpoints = plt.axes([0.48, 0.02, 0.09, 0.10])
+        self.b_saveallpoints = Button(self.ax_saveallpoints, 'save\nall points')
+        self.b_saveallpoints.on_clicked(self.SaveInterp)
 
         self.ax.grid(True)
 
