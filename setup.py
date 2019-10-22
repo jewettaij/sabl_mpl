@@ -12,14 +12,15 @@ setup(
 
   url='https://jensenlab.caltech.edu',
 
-  # BSD 3-Clause License:
-  # - http://choosealicense.com/licenses/bsd-3-clause
-  # - http://opensource.org/licenses/BSD-3-Clause
-
-  license='BSD',
+  install_requires=[
+      'numpy',
+      'matplotlib',
+  ],
+    
+  license='MIT',
 
   classifiers=['Development Status :: 3 - Alpha',
-               'License :: OSI Approved :: BSD License',
+               'License :: OSI Approved :: MIT License',
                'Environment :: Console',
                'Operating System :: MacOS :: MacOS X',
                'Operating System :: POSIX :: Linux',

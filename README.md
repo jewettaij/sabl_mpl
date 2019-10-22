@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/License-MIT-green.svg)]
+
 sabl_mpl
 ===========
 
@@ -56,6 +58,5 @@ to contain the following lines:
 
 ## License
 
-sabl_mpl is available under the terms of the open-source 3-clause BSD 
-license.  (See `LICENSE.md`.)
+sabl_mpl is available under the terms of the [MIT License](LICENSE.md).
 
