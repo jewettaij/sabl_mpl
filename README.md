@@ -31,7 +31,7 @@ It also requires that the "matplotlib" python module is installed.
 
 There are two ways to install sabl_mpl:
 
-## Installation using pip
+### Installation using pip
 
 If you are familiar with pip, then run the following command from within the directory where this README file is located:
 
@@ -42,7 +42,7 @@ Make sure that your default pip install bin directory is in your PATH.  (This is
     pip uninstall sabl_mpl
 
 
-## Manual Installation method:
+### Manual Installation method:
 
 Alternatively, you can edit your PATH variable manually to include
 the subdirectory where the sabl.py script is located,
