@@ -25,7 +25,7 @@ This is a graphical program which must be invoked from a terminal.  (When doing 
 ## Requirements
 
 This program requires python 2.6 or later.
-It also requires that the "matplotlib" python module is installed.  As with all linux and unix programs, this script must be copied to a directory which is located in your PATH.  (For more information see "Installation Details" at the end of this file.)
+It also requires that the "matplotlib" python module is installed.
 
 ## Installation Instructions
 
