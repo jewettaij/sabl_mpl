@@ -1,4 +1,8 @@
-[![License](https://img.shields.io/badge/License-MIT-green.svg)]
+[![License](https://img.shields.io/badge/License-MIT-green.svg)]()
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/sable_mpl)](https://pypistats.org/packages/sable_mpl)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jewettaij/sable_mpl)]()
+
+
 
 sabl_mpl
 ===========
