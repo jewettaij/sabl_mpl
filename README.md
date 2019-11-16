@@ -1,6 +1,5 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)]()
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/sable_mpl)](https://pypistats.org/packages/sable_mpl)
-[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/jewettaij/sable_mpl)]()
+[![GitHub repo size](https://img.shields.io/github/repo-size/jewettaij/sabl_mpl)]()
 
 
 
@@ -9,31 +8,65 @@ sabl_mpl
 
 ![](./doc/example_multiple_measurements_LR.png)
 
+## WARNING: DOES NOT RUN ON MODERN PYTHON DISTRIBUTIONS
+
+As of 2019-11-15, *sabl_mpl* still works with python v2.7 and matplotlib v1.3.1.
+
+However this program does *not* work with more recent versions of
+matplotlib, including 
+[v2.0.0](https://github.com/jewettaij/sabl_mpl/issues/1),
+and
+[v3.0.1](https://github.com/jewettaij/sabl_mpl/issues/2),
+
+*There is nothing I can do to fix this,
+ because the bugs are in matplotlib itself.*
+
+As a work-around, try installing an old version of python or locate an
+apple Mac.  (Some modern apple laptops still ship with python 2.7 and
+matplotlib 1.3.1.)
+
+*(My apologies to anyone who uses this program.
+  Over the last couple years I have watched matplotlib's GUI
+  code deteriorate significantly.
+  I recommend steering clear of using generic matplotlib buttons and
+  widgets for any future projects that require a GUI.)
+
+
 ##  Usage
 
     sabl.py [-p w] [-discard h r] [-nspline n] [-alpha a] image_file.png 
 
+
 ##  Description
 
-"sabl_mpl.py" is a simple spline drawing program which uses the matplotlib gui.  It was intended to be used to measure the curvature of cell membranes in electron microscopy images.  It has some features to make it convenient to repetitively measure many distances and angles in any 2-D image manually.  It requires python and matplotlib to be installed in advance.
+"sabl_mpl.py" is a simple spline drawing program which uses the matplotlib gui.  It was intended to be used to measure the curvature of cell membranes and other features in electron microscopy images.  It is a convenient way to repetitively measure many distances and angles in a 2-D image *manually*.  It requires python and matplotlib to be installed in advance.
 (This software was featured in Yao et al. EMBO J. (2017), DOI 10.15252/embj.201696235)
 
 Images showing how to use it are located in the "docs" directory, as well as detailed usage and installation instructions.
 
 (NOTE: You must click using the MIDDLE mouse button to draw and make measurements)
 
+
 ##  Note:
 
-This is a graphical program which must be invoked from a terminal.  (When doing so, do not use "&".)
+This is a graphical program which ***must*** be invoked from a terminal.  (This is because I was too lazy to write a proper GUI.  This program will report measurements to the terminal where it was invoked.  So when invoking, I suggest using "sabl_mpl.py", *not* "sabl_mpl.py &".)
+
 
 ## Requirements
 
-This program requires python 2.6 or later.
-It also requires that the "matplotlib" python module is installed.
+This program requires *python 2.6* or later.
+
+It also requires the *matplotlib* python module.
+
+The *cv2* python module is recommended but not required.
+*(If the "cv2" module is installed, then sabl_mpl will be
+able to read a wider variety of image formats.)*
+
 
 ## Installation Instructions
 
 There are two ways to install sabl_mpl:
+
 
 ### Installation using pip
 
@@ -59,6 +92,7 @@ If you use the bash shell, typically you would edit your
 to contain the following lines:
 
     export PATH="$PATH:$HOME/sabl_mpl/sabl_mpl"
+
 
 ## License
 

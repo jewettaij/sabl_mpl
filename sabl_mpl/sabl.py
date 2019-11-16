@@ -27,8 +27,8 @@ import bisect
 from collections import deque
 
 g_program_name = __file__.split('/')[-1]
-g_date_str     = '2018-1-23'
-g_version_str  = '0.49'
+g_date_str     = '2019-11-15'
+g_version_str  = '0.2.2'
 g_filename_in  = ''
 
 
@@ -2541,7 +2541,7 @@ class SplineBuilder:
         # I want to be able to change the color of the maxima depending on their
         # curvature, so I decided to use "scatter()" instead of "plot()".
         #self.maxima = ax.scatter([], [], c=[], cmap='hsv', vmin=0, vmax=1, s=25)
-        self.maxima = ax.scatter([], [], c=[], cmap='spectral', vmin=0, vmax=1, s=30)
+        self.maxima = ax.scatter([], [], c=[], cmap='Spectral', vmin=0, vmax=1, s=30)
         self.maxima.set_zorder(20)
         self.maxima_colors = []
 
@@ -2555,6 +2555,7 @@ class SplineBuilder:
         self.mouse_cid    = None
         self.key_press_cid = None
         self.key_release_cid = None
+        print('self.mouse_cid = '+str(self.mouse_cid)+'\n')
 
 
 
