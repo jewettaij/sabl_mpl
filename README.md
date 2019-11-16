@@ -29,7 +29,7 @@ matplotlib 1.3.1.)
   Over the last couple years I have watched matplotlib's GUI
   code deteriorate significantly.
   I recommend steering clear of using generic matplotlib buttons and
-  widgets for any future projects that require a GUI.)
+  widgets for any future projects that require a GUI.)*
 
 
 ##  Usage

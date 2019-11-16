@@ -17,7 +17,7 @@ setup(
       'matplotlib',
   ],
 
-  download_url='https://github.com/jewettaij/sabl_mpl/archive/v0.2.1.zip',
+  download_url='https://github.com/jewettaij/sabl_mpl/archive/v0.2.2.zip',
 
   version='0.2.2',
 
