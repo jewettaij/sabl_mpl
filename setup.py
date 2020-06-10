@@ -17,9 +17,9 @@ setup(
       'matplotlib',
   ],
 
-  download_url='https://github.com/jewettaij/sabl_mpl/archive/v0.2.2.zip',
+  download_url='https://github.com/jewettaij/sabl_mpl/archive/v0.2.3.zip',
 
-  version='0.2.2',
+  version='0.2.3',
 
   license='MIT',
 
@@ -33,7 +33,8 @@ setup(
                'Intended Audience :: Science/Research',
   ],
   entry_points={
-      'console_scripts': ['sabl.py=sabl_mpl.sabl:main']
+      'console_scripts': ['sabl.py=sabl_mpl.sabl:main',
+                          'curvature3pts.py=sabl_mpl.curvature3pts:main']
       },
   zip_safe=True,
   include_package_data=True
