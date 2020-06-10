@@ -1,0 +1,23 @@
+## curvature3pts.py
+
+A crude command line utility which reads the coordinates of 3 points,
+finds the circle which passes through them, and returns the center
+and the radius of that circle.
+
+Since this might be useful to the same audience that would use "sabl.py",
+I decided to included it as a simple stand-alone program.
+
+## Usage
+
+   curvature3pts.py < coordinates.txt
+
+## Details
+
+This program reads a text file from the standard input in multi-column
+format, with N numbers on each line delimited by spaces. (Usually N=2 or 3.)
+This file should contain exactly 3 lines (corresponding to the 3 points
+on the circle).
+
+This program works in an arbitrary number of dimensions.
+(The number of dimensions is specified by the number of columns in the file.)
+
