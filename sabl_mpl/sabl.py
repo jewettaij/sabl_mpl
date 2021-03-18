@@ -145,7 +145,7 @@ def TDMAsolver(a, b, c, d):
     '''
 
     nf = len(a)     # number of equations
-    ac, bc, cc, dc = map(np.array, (a, b, c, d))     # copy the array
+    ac, bc, cc, dc = tuple(map(np.array, (a, b, c, d)))     # copy the array
     for it in xrange(1, nf):
         mc = ac[it]/bc[it-1]
         bc[it] = bc[it] - mc*cc[it-1] 
@@ -3310,7 +3310,12 @@ class WorldObjects:
 
         self.ax.grid(True)
 
-        plt.show()
+        # OLD CODE:
+        # plt.show()
+        # NEW CODE:
+        plt.show(block=False)
+        # THANKS TO:
+        #https://stackoverflow.com/questions/50716203/problems-with-matplotlib-and-tkinter-exception-in-tkinter-callback
 
 
     def Finalize(self):
